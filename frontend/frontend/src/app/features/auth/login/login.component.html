@@ -1,0 +1,21 @@
+<div class="auth-container">
+  <form class="auth-card" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <h1>Log in to TaxPal</h1>
+
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" [(ngModel)]="email" required />
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" [(ngModel)]="password" required />
+
+    @if (errorMessage) {
+      <p class="error">{{ errorMessage }}</p>
+    }
+
+    <button type="submit" [disabled]="loginForm.invalid">Log In</button>
+
+    <p class="switch-link">
+      Don't have an account? <a routerLink="/signup">Sign up</a>
+    </p>
+  </form>
+</div>

@@ -1,0 +1,9 @@
+.dashboard { padding: 2rem; max-width: 900px; margin: 0 auto; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+header button {
+  padding: 0.5rem 1rem; background: #eee; border: none; border-radius: 6px; cursor: pointer;
+}
+.placeholder-card {
+  background: #f9f9f9; border: 1px dashed #ccc; border-radius: 10px;
+  padding: 2rem; text-align: center; color: #666;
+}
