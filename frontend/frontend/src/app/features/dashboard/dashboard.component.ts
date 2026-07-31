@@ -13,7 +13,11 @@ export class DashboardComponent {
   constructor(public auth: AuthService, private router: Router) {}
 
   logout(): void {
-    this.auth.logout();
+    this.auth.logout().subscribe({
+  next: () => {
+    this.router.navigate(['/login']);
+  }
+});
     this.router.navigate(['/login']);
   }
 }

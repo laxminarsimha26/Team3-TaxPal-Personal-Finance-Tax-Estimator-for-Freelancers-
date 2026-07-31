@@ -19,17 +19,31 @@ export class SignupComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  onSubmit(): void {
-    const result = this.auth.signup({
-      name: this.name,
-      email: this.email,
-      password: this.password,
-      country: this.country,
-    });
-    if (result.success) {
-      this.router.navigate(['/login']);
-    } else {
-      this.errorMessage = result.message;
+ onSubmit(): void {
+
+  this.errorMessage = '';
+
+  this.auth.signup({
+    name: this.name,
+    email: this.email,
+    password: this.password,
+    country: this.country,
+    income_bracket: null
+  }).subscribe({
+
+    next: (response: any) => {
+
+      if (response.success) {
+        this.router.navigate(['/login']);
+      } else {
+        this.errorMessage = response.message;
+      }
+
+    },
+
+    error: (error) => {
+      this.errorMessage = error.error?.message || 'Signup failed';
     }
-  }
-}
+
+  });
+ }}
