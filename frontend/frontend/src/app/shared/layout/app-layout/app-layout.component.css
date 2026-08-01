@@ -1,0 +1,2 @@
+.layout { display: flex; min-height: 100vh; background: #f6f7fb; }
+.content { flex: 1; padding: 2rem; box-sizing: border-box; }

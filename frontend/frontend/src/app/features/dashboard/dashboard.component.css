@@ -1,9 +1,227 @@
-.dashboard { padding: 2rem; max-width: 900px; margin: 0 auto; }
-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-header button {
-  padding: 0.5rem 1rem; background: #eee; border: none; border-radius: 6px; cursor: pointer;
+/* ==========================================
+   Global & Page Title
+   ========================================== */
+.page-title {
+  color: #111827;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
 }
-.placeholder-card {
-  background: #f9f9f9; border: 1px dashed #ccc; border-radius: 10px;
-  padding: 2rem; text-align: center; color: #666;
+
+/* ==========================================
+   Summary Cards (Top Row)
+   ========================================== */
+.summary-cards {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.25rem;
+  flex: 1;
+  min-width: 200px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card span {
+  font-size: 0.85rem;
+  color: #4b5563; /* High-contrast dark gray for labels */
+  font-weight: 500;
+}
+
+.card strong {
+  font-size: 1.5rem;
+  color: #111827; /* Dark black text for visible amounts */
+  font-weight: 700;
+  opacity: 1;
+}
+
+/* ==========================================
+   Charts Section
+   ========================================== */
+.charts-row {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.chart-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.25rem;
+  flex: 1;
+  min-width: 280px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.chart-card h2 {
+  font-size: 1.1rem;
+  color: #111827;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* Bar Chart */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2rem;
+  height: 160px;
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.bar {
+  width: 45px;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  transition: height 0.3s ease;
+}
+
+.bar.income {
+  background-color: #2a9d5c;
+}
+
+.bar.expense {
+  background-color: #e63946;
+}
+
+.bar-label {
+  position: absolute;
+  top: -22px;
+  color: #1f2937; /* Dark, readable text above bars */
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+/* Pie Chart */
+.pie {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+}
+
+.pie-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.85rem;
+  color: #374151; /* Dark gray for category list */
+}
+
+.pie-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.dot.income {
+  background: #2a9d5c;
+}
+
+.dot.expense {
+  background: #e63946;
+}
+
+/* ==========================================
+   Recent Transactions Table
+   ========================================== */
+.recent-transactions {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-size: 1.1rem;
+  color: #111827;
+  font-weight: 600;
+  margin: 0;
+}
+
+.section-header a {
+  font-size: 0.85rem;
+  color: #2f6fed;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.section-header a:hover {
+  text-decoration: underline;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+th {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+td {
+  color: #111827;
+}
+
+td.income {
+  color: #2a9d5c;
+  font-weight: 600;
+}
+
+td.expense {
+  color: #e63946;
+  font-weight: 600;
+}
+
+.empty-state {
+  color: #6b7280;
+  text-align: center;
+  padding: 1rem 0;
 }

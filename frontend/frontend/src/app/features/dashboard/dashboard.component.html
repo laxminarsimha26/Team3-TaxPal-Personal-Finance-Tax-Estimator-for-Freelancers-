@@ -1,0 +1,86 @@
+<h1 class="page-title">Dashboard</h1>
+
+<div class="summary-cards">
+  <div class="card">
+    <span>Monthly Income</span>
+    <strong>₹{{ txService.totalIncome().toFixed(2) }}</strong>
+  </div>
+  <div class="card">
+    <span>Monthly Expenses</span>
+    <strong>₹{{ txService.totalExpense().toFixed(2) }}</strong>
+  </div>
+  <div class="card">
+    <span>Estimated Tax Due</span>
+    <strong>Coming in Milestone 3</strong>
+  </div>
+  <div class="card">
+    <span>Savings Rate</span>
+    <strong>{{ savingsRate() }}%</strong>
+  </div>
+</div>
+
+<div class="charts-row">
+  <div class="chart-card">
+    <h2>Income vs Expenses</h2>
+    @if (txService.transactions().length === 0) {
+      <p class="empty-state">Add transactions to see this chart.</p>
+    } @else {
+      <div class="bar-chart">
+        <div class="bar income" [style.height.%]="100">
+          <span class="bar-label">₹{{ txService.totalIncome().toFixed(0) }}</span>
+        </div>
+        <div class="bar expense"
+             [style.height.%]="(txService.totalExpense() / txService.totalIncome()) * 100">
+          <span class="bar-label">₹{{ txService.totalExpense().toFixed(0) }}</span>
+        </div>
+      </div>
+      <div class="bar-legend">
+        <span><i class="dot income"></i> Income</span>
+        <span><i class="dot expense"></i> Expenses</span>
+      </div>
+    }
+  </div>
+
+  <div class="chart-card">
+    <h2>Expense Breakdown</h2>
+    @if (expenseBreakdown().length === 0) {
+      <p class="empty-state">No expenses logged yet.</p>
+    } @else {
+      <div class="pie" [style.background]="pieGradient()"></div>
+      <ul class="pie-legend">
+        @for (seg of expenseBreakdown(); track seg.category) {
+          <li><i class="dot" [style.background]="seg.color"></i> {{ seg.category }} — {{ seg.percent }}%</li>
+        }
+      </ul>
+    }
+  </div>
+</div>
+
+<div class="recent-transactions">
+  <div class="section-header">
+    <h2>Recent Transactions</h2>
+    <a routerLink="/transactions">View All</a>
+  </div>
+
+  @if (recentTransactions().length === 0) {
+    <p class="empty-state">No transactions yet.</p>
+  } @else {
+    <table>
+      <thead>
+        <tr><th>Date</th><th>Category</th><th>Amount</th><th>Type</th></tr>
+      </thead>
+      <tbody>
+        @for (tx of recentTransactions(); track tx.id) {
+          <tr>
+            <td>{{ tx.date }}</td>
+            <td>{{ tx.category }}</td>
+            <td [class.income]="tx.type === 'income'" [class.expense]="tx.type === 'expense'">
+              {{ tx.type === 'income' ? '+' : '-' }}₹{{ tx.amount.toFixed(2) }}
+            </td>
+            <td>{{ tx.type }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

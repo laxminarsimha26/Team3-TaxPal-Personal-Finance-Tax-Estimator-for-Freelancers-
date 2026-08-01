@@ -7,7 +7,7 @@ import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterLink], 
+  imports: [FormsModule, RouterLink], // CommonModule no longer needed
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -18,27 +18,12 @@ export class LoginComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
- onSubmit(): void {
-
-  this.errorMessage = '';
-
-  this.auth.login(this.email, this.password)
-    .subscribe({
-
-      next: (response: any) => {
-
-        if (response.success) {
-          this.router.navigate(['/dashboard']);
-        } else {
-          this.errorMessage = response.message;
-        }
-
-      },
-
-      error: (error) => {
-        this.errorMessage = error.error?.message || 'Login failed';
-      }
-
-    });
-
-}}
+  onSubmit(): void {
+    const result = this.auth.login(this.email, this.password);
+    if (result.success) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.errorMessage = result.message;
+    }
+  }
+}

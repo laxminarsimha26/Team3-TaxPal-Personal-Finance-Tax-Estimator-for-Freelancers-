@@ -3,22 +3,31 @@
     <h1>Create your TaxPal account</h1>
 
     <label for="name">Full Name</label>
-    <input id="name" name="name" [(ngModel)]="name" required />
+    <input id="name" name="name" [(ngModel)]="name" required placeholder="Enter your full name" />
 
     <label for="email">Email</label>
-    <input id="email" name="email" type="email" [(ngModel)]="email" required />
+    <input id="email" name="email" type="email" [(ngModel)]="email" required placeholder="Enter your email address" />
 
     <label for="password">Password</label>
-    <input id="password" name="password" type="password" [(ngModel)]="password" required minlength="6" />
+    <input id="password" name="password" type="password" [(ngModel)]="password" required minlength="6" placeholder="Choose a password" />
 
     <label for="country">Country</label>
-    <input id="country" name="country" [(ngModel)]="country" required />
+    <input id="country" name="country" [(ngModel)]="country" required placeholder="Select or type your country" />
+
+    <!-- Updated values to match 'low' | 'middle' | 'high' -->
+    <label for="incomeBracket">Income Bracket (Optional)</label>
+    <select id="incomeBracket" name="incomeBracket" [(ngModel)]="incomeBracket">
+      <option value="" disabled selected>Select your income bracket</option>
+      <option value="low">Low Income</option>
+      <option value="middle">Middle Income</option>
+      <option value="high">High Income</option>
+    </select>
 
     @if (errorMessage) {
       <p class="error">{{ errorMessage }}</p>
     }
 
-    <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+    <button type="submit" [disabled]="signupForm.invalid">Create Account</button>
 
     <p class="switch-link">Already have an account? <a routerLink="/login">Log in</a></p>
   </form>

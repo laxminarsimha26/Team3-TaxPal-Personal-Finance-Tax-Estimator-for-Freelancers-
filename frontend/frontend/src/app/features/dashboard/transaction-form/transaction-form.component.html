@@ -1,0 +1,35 @@
+<form class="tx-form" (ngSubmit)="onSubmit()" #txForm="ngForm">
+  <h2>Add Transaction</h2>
+
+  <div class="type-toggle">
+    <button type="button"
+            [class.active]="type === 'income'"
+            (click)="type = 'income'; category = ''">
+      Income
+    </button>
+    <button type="button"
+            [class.active]="type === 'expense'"
+            (click)="type = 'expense'; category = ''">
+      Expense
+    </button>
+  </div>
+
+  <label for="category">Category</label>
+  <select id="category" name="category" [(ngModel)]="category" required>
+    <option value="" disabled selected>Select a category</option>
+    @for (cat of categoryOptions; track cat) {
+      <option [value]="cat">{{ cat }}</option>
+    }
+  </select>
+
+  <label for="amount">Amount</label>
+  <input id="amount" name="amount" type="number" min="0.01" step="0.01"
+         [(ngModel)]="amount" required />
+
+  <label for="date">Date</label>
+  <input id="date" name="date" type="date" [(ngModel)]="date" required />
+
+  <button type="submit" class="submit-btn" [disabled]="txForm.invalid">
+    Add {{ type === 'income' ? 'Income' : 'Expense' }}
+  </button>
+</form>

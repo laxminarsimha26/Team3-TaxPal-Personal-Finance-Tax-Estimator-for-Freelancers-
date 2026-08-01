@@ -1,0 +1,22 @@
+<aside class="sidebar">
+  <div class="brand">TaxPal</div>
+
+  <nav>
+    <a routerLink="/dashboard" routerLinkActive="active">🏠 Dashboard</a>
+    <a routerLink="/transactions" routerLinkActive="active">🔁 Transactions</a>
+    <a routerLink="/budgets" routerLinkActive="active">⏱ Budgets</a>
+    <a routerLink="/tax-estimator" routerLinkActive="active">📄 Tax Estimator</a>
+    <a routerLink="/reports" routerLinkActive="active">📊 Reports</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="user-info">
+      <span class="avatar">{{ auth.currentUser()?.name?.charAt(0) }}</span>
+      <div>
+        <strong>{{ auth.currentUser()?.name }}</strong>
+        <small>{{ auth.currentUser()?.email }}</small>
+      </div>
+    </div>
+    <button class="logout-btn" (click)="logout()">⎋ Logout</button>
+  </div>
+</aside>

@@ -1,0 +1,39 @@
+<div class="tx-list-container">
+  <div class="summary-cards">
+    <div class="card income">
+      <span>Total Income</span>
+      <strong>₹{{ txService.totalIncome().toFixed(2) }}</strong>
+    </div>
+    <div class="card expense">
+      <span>Total Expense</span>
+      <strong>₹{{ txService.totalExpense().toFixed(2) }}</strong>
+    </div>
+    <div class="card balance">
+      <span>Balance</span>
+      <strong>₹{{ txService.balance().toFixed(2) }}</strong>
+    </div>
+  </div>
+
+  <h2>Recent Transactions</h2>
+
+  @if (txService.transactions().length === 0) {
+    <p class="empty-state">No transactions yet. Add your first one above.</p>
+  } @else {
+    <ul class="tx-list">
+      @for (tx of txService.transactions(); track tx.id) {
+        <li class="tx-item" [class.income]="tx.type === 'income'" [class.expense]="tx.type === 'expense'">
+          <div class="tx-info">
+            <span class="tx-category">{{ tx.category }}</span>
+            <span class="tx-date">{{ tx.date }}</span>
+          </div>
+          <div class="tx-actions">
+            <span class="tx-amount">
+              {{ tx.type === 'income' ? '+' : '-' }}₹{{ tx.amount.toFixed(2) }}
+            </span>
+            <button class="delete-btn" (click)="delete(tx.id)">✕</button>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</div>
