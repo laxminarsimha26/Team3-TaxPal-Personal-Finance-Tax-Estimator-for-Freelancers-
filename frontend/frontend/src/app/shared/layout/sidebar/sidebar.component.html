@@ -1,5 +1,8 @@
 <aside class="sidebar">
-  <div class="brand">TaxPal</div>
+  <div class="brand">
+    <span class="brand-icon">⚡</span>
+    <span class="brand-name">TaxPal</span>
+  </div>
 
   <nav>
     <a routerLink="/dashboard" routerLinkActive="active">🏠 Dashboard</a>
@@ -12,7 +15,7 @@
   <div class="sidebar-footer">
     <div class="user-info">
       <span class="avatar">{{ auth.currentUser()?.name?.charAt(0) }}</span>
-      <div>
+      <div class="user-details">
         <strong>{{ auth.currentUser()?.name }}</strong>
         <small>{{ auth.currentUser()?.email }}</small>
       </div>

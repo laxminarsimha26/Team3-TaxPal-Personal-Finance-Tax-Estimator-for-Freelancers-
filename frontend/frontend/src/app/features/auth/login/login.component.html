@@ -8,6 +8,10 @@
     <label for="password">Password</label>
     <input id="password" name="password" type="password" [(ngModel)]="password" required />
 
+    <p class="forgot-link">
+      <a routerLink="/forgot-password">Forgot password?</a>
+    </p>
+
     @if (errorMessage) {
       <p class="error">{{ errorMessage }}</p>
     }

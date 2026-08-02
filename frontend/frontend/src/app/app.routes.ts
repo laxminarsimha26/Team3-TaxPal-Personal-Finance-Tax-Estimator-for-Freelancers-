@@ -15,6 +15,20 @@ export const routes: Routes = [
       import('./features/auth/signup/signup.component').then(m => m.SignupComponent),
   },
   {
+    path: 'forgot-password',
+    loadComponent: () =>
+      import('./features/auth/forgot-password/forgot-password.component').then(
+        m => m.ForgotPasswordComponent
+      ),
+  },
+  {
+    path: 'reset-password/:token',
+    loadComponent: () =>
+      import('./features/auth/reset-password/reset-password.component').then(
+        m => m.ResetPasswordComponent
+      ),
+  },
+  {
     path: '',
     component: AppLayoutComponent,
     canActivate: [authGuard],
@@ -22,12 +36,16 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () =>
-          import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
+          import('./features/dashboard/dashboard.component').then(
+            m => m.DashboardComponent
+          ),
       },
       {
         path: 'transactions',
         loadComponent: () =>
-          import('./features/transactions/transactions.component').then(m => m.TransactionsComponent),
+          import('./features/transactions/transactions.component').then(
+            m => m.TransactionsComponent
+          ),
       },
     ],
   },
