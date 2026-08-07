@@ -47,6 +47,18 @@ export const routes: Routes = [
             m => m.TransactionsComponent
           ),
       },
+      {
+        path: 'budgets',
+        loadComponent: () =>
+          import('./features/budgets/budgets.component').then(
+            m => m.BudgetsComponent
+          ),
+      },
+      {
+        path: 'categories',
+        loadComponent: () =>
+          import('./features/categories/categories.component').then(m => m.CategoriesComponent),
+      },
     ],
   },
   { path: '**', redirectTo: 'login' },

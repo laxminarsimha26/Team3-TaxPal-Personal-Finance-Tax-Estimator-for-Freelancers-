@@ -1,0 +1,59 @@
+<h1 class="page-title">Budgets</h1>
+<p class="subtitle">Set monthly spending limits per category — {{ budgetService.selectedMonth() }}</p>
+
+<div class="budget-form-card">
+  <h2>Set a Budget</h2>
+
+  @if (availableCategories.length === 0) {
+    <p class="empty-state">All your expense categories already have a budget this month.</p>
+  } @else {
+    <form (ngSubmit)="onAddBudget()" #form="ngForm" class="budget-form">
+      <select name="category" [(ngModel)]="newCategory" required>
+        <option value="" disabled selected>Select category</option>
+        @for (cat of availableCategories; track cat) {
+          <option [value]="cat">{{ cat }}</option>
+        }
+      </select>
+
+      <input type="number" name="limit" placeholder="Monthly limit"
+             min="1" step="0.01" [(ngModel)]="newLimit" required />
+
+      <button type="submit" [disabled]="form.invalid">Set Budget</button>
+    </form>
+  }
+</div>
+
+<div class="budget-list">
+  @if (budgetService.budgetsWithProgress().length === 0) {
+    <p class="empty-state">No budgets set yet this month.</p>
+  } @else {
+    @for (b of budgetService.budgetsWithProgress(); track b.id) {
+      <div class="budget-card">
+        <div class="budget-header">
+          <strong>{{ b.category }}</strong>
+          <button class="delete-btn" (click)="onDelete(b.id)">✕</button>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill"
+               [style.width.%]="b.percentUsed"
+               [style.background]="barColor(b.percentUsed)">
+          </div>
+        </div>
+
+        <div class="budget-footer">
+          <span>₹{{ b.spent.toFixed(2) }} of ₹{{ b.limit.toFixed(2) }}</span>
+          @if (b.remaining >= 0) {
+            <span class="remaining ok">₹{{ b.remaining.toFixed(2) }} left</span>
+          } @else {
+            <span class="remaining over">₹{{ (-b.remaining).toFixed(2) }} over</span>
+          }
+        </div>
+      </div>
+    }
+  }
+  <p class="subtitle">
+  Set monthly spending limits per category — {{ budgetService.selectedMonth() }}
+  · <a routerLink="/categories">Manage Categories</a>
+</p>
+</div>

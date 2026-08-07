@@ -1,0 +1,221 @@
+/* Container & Dynamic Gradient Headings */
+.page-title { 
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2.25rem; 
+  font-weight: 800; 
+  letter-spacing: -0.03em;
+  margin-bottom: 0.25rem; 
+}
+
+.subtitle { 
+  color: #475569; 
+  font-size: 0.95rem; 
+  font-weight: 500;
+  margin-bottom: 2rem; 
+}
+
+.subtitle a {
+  color: #7c3aed;
+  font-weight: 700;
+  text-decoration: none;
+  background: #f3e8ff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.subtitle a:hover {
+  background: #7c3aed;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+}
+
+/* Card with Warm Top Accent */
+.add-form-card {
+  background: linear-gradient(145deg, #ffffff 0%, #faf5ff 100%); 
+  border-radius: 20px; 
+  padding: 1.8rem;
+  border: 1px solid #f3e8ff;
+  box-shadow: 0 10px 30px -5px rgba(124, 58, 237, 0.08); 
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #6366f1, #ec4899, #f59e0b);
+}
+
+.add-form-card h2 { 
+  color: #3b0764; 
+  font-size: 1.25rem; 
+  font-weight: 800; 
+  margin-bottom: 1.25rem; 
+}
+
+/* Form Controls */
+.add-form { 
+  display: flex; 
+  gap: 1rem; 
+  align-items: center;
+}
+
+.add-form input,
+.add-form select {
+  padding: 0.75rem 1.1rem; 
+  border: 2px solid #e9d5ff; 
+  border-radius: 12px;
+  color: #1e1b4b;
+  background-color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.add-form input:focus,
+.add-form select:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+}
+
+.add-form button {
+  padding: 0.75rem 1.6rem; 
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); 
+  color: #ffffff;
+  border: none; 
+  border-radius: 12px; 
+  cursor: pointer; 
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.35);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.add-form button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(236, 72, 153, 0.45);
+}
+
+.add-form button:disabled { 
+  background: #cbd5e1; 
+  box-shadow: none;
+  cursor: not-allowed; 
+}
+
+.error { 
+  color: #ef4444; 
+  font-size: 0.85rem; 
+  font-weight: 600;
+  margin-top: 0.75rem; 
+  background: #fef2f2;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  display: inline-block;
+  border: 1px solid #fee2e2;
+}
+
+/* Columns Section */
+.category-columns { 
+  display: flex; 
+  gap: 1.5rem; 
+}
+
+.category-column {
+  flex: 1; 
+  background: #ffffff; 
+  border-radius: 20px; 
+  padding: 1.5rem 1.75rem;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-column:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 35px -5px rgba(99, 102, 241, 0.12);
+  border-color: #e0e7ff;
+}
+
+.category-column h2 { 
+  font-size: 1.1rem; 
+  font-weight: 800; 
+  margin-bottom: 1.25rem; 
+  color: #1e1b4b; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 0.75rem;
+}
+
+/* Category Item List */
+.category-column ul { 
+  list-style: none; 
+  padding: 0; 
+  margin: 0;
+}
+
+.category-column li {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  padding: 0.75rem 0.85rem; 
+  margin-bottom: 0.4rem;
+  border-radius: 12px;
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: #334155; 
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.category-column li:hover {
+  background: #f3e8ff;
+  color: #581c87;
+  border-color: #e9d5ff;
+  transform: translateX(4px);
+}
+
+/* Delete Button */
+.delete-btn { 
+  border: none; 
+  background: #ffffff; 
+  color: #ef4444; 
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; 
+  font-size: 0.85rem;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover { 
+  background: #ef4444; 
+  color: #ffffff; 
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.empty-state { 
+  color: #94a3b8; 
+  font-size: 0.9rem; 
+  font-weight: 500;
+  text-align: center;
+  padding: 1.5rem 0;
+}

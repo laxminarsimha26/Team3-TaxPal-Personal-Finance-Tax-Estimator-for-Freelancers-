@@ -1,0 +1,54 @@
+<h1 class="page-title">Manage Categories</h1>
+<p class="subtitle"><a routerLink="/budgets">← Back to Budgets</a></p>
+
+<div class="add-form-card">
+  <h2>Add Category</h2>
+  <form (ngSubmit)="onAdd()" #form="ngForm" class="add-form">
+    <input name="name" placeholder="Category name" [(ngModel)]="newName" required />
+
+    <select name="type" [(ngModel)]="newType" required>
+      <option value="expense">Expense</option>
+      <option value="income">Income</option>
+    </select>
+
+    <button type="submit" [disabled]="form.invalid">Add</button>
+  </form>
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+</div>
+
+<div class="category-columns">
+  <div class="category-column">
+    <h2>Income Categories</h2>
+    @if (categoryService.incomeCategories().length === 0) {
+      <p class="empty-state">No income categories yet.</p>
+    } @else {
+      <ul>
+        @for (cat of categoryService.incomeCategories(); track cat.id) {
+          <li>
+            <span>{{ cat.name }}</span>
+            <button class="delete-btn" (click)="onDelete(cat.id)">✕</button>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
+  <div class="category-column">
+    <h2>Expense Categories</h2>
+    @if (categoryService.expenseCategories().length === 0) {
+      <p class="empty-state">No expense categories yet.</p>
+    } @else {
+      <ul>
+        @for (cat of categoryService.expenseCategories(); track cat.id) {
+          <li>
+            <span>{{ cat.name }}</span>
+            <button class="delete-btn" (click)="onDelete(cat.id)">✕</button>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</div>
