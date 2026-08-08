@@ -20,10 +20,13 @@ CREATE TABLE transactions (
     amount DECIMAL(10,2) NOT NULL CHECK(amount>=0),
     date DATE not null,
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE);
+<<<<<<< HEAD
    
 >>>>>>> 36d969f (added users and transactions tables)
 
 
+=======
+>>>>>>> 6f899e2 (CHANGES)
 -- 3. BUDGETS TABLE
 CREATE TABLE budgets (
     id INT AUTO_INCREMENT PRIMARY KEY,
