@@ -20,6 +20,7 @@ CREATE TABLE transactions (
     amount DECIMAL(10,2) NOT NULL CHECK(amount>=0),
     date DATE not null,
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE);
+
 <<<<<<< HEAD
    
 >>>>>>> 36d969f (added users and transactions tables)
