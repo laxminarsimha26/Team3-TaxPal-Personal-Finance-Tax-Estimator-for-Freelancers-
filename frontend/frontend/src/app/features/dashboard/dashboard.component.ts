@@ -3,7 +3,6 @@ import { AuthService } from '../../core/services/auth.service';
 import { TransactionService } from '../../core/services/transaction.service';
 import { RouterLink } from '@angular/router';
 
-
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -15,6 +14,25 @@ export class DashboardComponent {
   constructor(public auth: AuthService, public txService: TransactionService) {}
 
   recentTransactions = computed(() => this.txService.transactions().slice(0, 5));
+
+  // Highest amount between income and expense to scale bar heights correctly
+  maxBarValue = computed(() => {
+    const inc = this.txService.totalIncome();
+    const exp = this.txService.totalExpense();
+    return Math.max(inc, exp, 1); // Avoid division by zero
+  });
+
+  incomeBarHeight = computed(() => {
+    const inc = this.txService.totalIncome();
+    if (inc <= 0) return 0;
+    return Math.min(100, Math.round((inc / this.maxBarValue()) * 100));
+  });
+
+  expenseBarHeight = computed(() => {
+    const exp = this.txService.totalExpense();
+    if (exp <= 0) return 0;
+    return Math.min(100, Math.round((exp / this.maxBarValue()) * 100));
+  });
 
   // Category breakdown for the expense pie (category -> % of total expense)
   expenseBreakdown = computed(() => {

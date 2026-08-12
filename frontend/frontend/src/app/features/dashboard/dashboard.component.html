@@ -26,11 +26,10 @@
       <p class="empty-state">Add transactions to see this chart.</p>
     } @else {
       <div class="bar-chart">
-        <div class="bar income" [style.height.%]="100">
+        <div class="bar income" [style.height.%]="incomeBarHeight()">
           <span class="bar-label">₹{{ txService.totalIncome().toFixed(0) }}</span>
         </div>
-        <div class="bar expense"
-             [style.height.%]="(txService.totalExpense() / txService.totalIncome()) * 100">
+        <div class="bar expense" [style.height.%]="expenseBarHeight()">
           <span class="bar-label">₹{{ txService.totalExpense().toFixed(0) }}</span>
         </div>
       </div>
