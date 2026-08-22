@@ -14,7 +14,7 @@ export class ForgotPasswordComponent {
   email = '';
   submitted = false;
   message = '';
-  devResetLink = ''; // placeholder for where the emailed link would point
+  devResetLink = ''; 
 
   constructor(private auth: AuthService) {}
 

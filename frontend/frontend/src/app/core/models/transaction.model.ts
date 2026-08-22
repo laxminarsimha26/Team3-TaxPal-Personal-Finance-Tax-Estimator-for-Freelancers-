@@ -6,5 +6,5 @@ export interface Transaction {
   type: TransactionType;
   category: string;
   amount: number;
-  date: string; // ISO date string, e.g. '2026-07-25'
+  date: string; 
 }

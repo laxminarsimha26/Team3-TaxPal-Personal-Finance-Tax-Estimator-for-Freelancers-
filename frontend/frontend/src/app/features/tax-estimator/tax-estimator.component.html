@@ -1,0 +1,160 @@
+<h1 class="page-title">Tax Estimator</h1>
+<p class="subtitle">Calculate your estimated tax obligations</p>
+
+<div class="tabs">
+  <button [class.active]="activeTab === 'calculator'" (click)="activeTab = 'calculator'">Calculator</button>
+  <button [class.active]="activeTab === 'calendar'" (click)="activeTab = 'calendar'">Calendar</button>
+</div>
+
+@if (activeTab === 'calculator') {
+  <div class="calculator-layout">
+    <div class="calc-card">
+      <h2>Quarterly Tax Calculator</h2>
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Country/Region</label>
+          <select [(ngModel)]="country" (ngModelChange)="onCountryChange()">
+            @for (c of taxService.countries; track c) {
+              <option [value]="c">{{ c }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="field">
+          <label>State/Province</label>
+          @if (availableStates.length > 0) {
+            <select [(ngModel)]="state">
+              @for (s of availableStates; track s) {
+                <option [value]="s">{{ s }}</option>
+              }
+            </select>
+          } @else {
+            <input type="text" placeholder="Enter state/province" [(ngModel)]="state" />
+          }
+        </div>
+
+        <div class="field">
+          <label>Filing Status</label>
+          <select [(ngModel)]="filingStatus">
+            @for (f of taxService.filingStatuses; track f) {
+              <option [value]="f">{{ f }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Quarter</label>
+          <select [(ngModel)]="quarter">
+            @for (q of taxService.allQuarters; track q) {
+              <option [value]="q">{{ taxService.quarterLabel(q, year) }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <h3 class="section-label">Income</h3>
+      <div class="field full">
+        <label>Gross Income for Quarter</label>
+        <div class="money-input">
+          <span>$</span>
+          <input type="number" min="0" step="0.01" placeholder="0.00" [(ngModel)]="grossIncome" />
+        </div>
+      </div>
+
+      <h3 class="section-label">Deductions</h3>
+      <div class="form-grid">
+        <div class="field">
+          <label>Business Expenses</label>
+          <div class="money-input">
+            <span>$</span>
+            <input type="number" min="0" step="0.01" placeholder="0.00" [(ngModel)]="businessExpenses" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Retirement Contributions</label>
+          <div class="money-input">
+            <span>$</span>
+            <input type="number" min="0" step="0.01" placeholder="0.00" [(ngModel)]="retirementContributions" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Health Insurance Premiums</label>
+          <div class="money-input">
+            <span>$</span>
+            <input type="number" min="0" step="0.01" placeholder="0.00" [(ngModel)]="healthInsurancePremiums" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Home Office Deduction</label>
+          <div class="money-input">
+            <span>$</span>
+            <input type="number" min="0" step="0.01" placeholder="0.00" [(ngModel)]="homeOfficeDeduction" />
+          </div>
+        </div>
+      </div>
+
+      <button class="calc-btn" (click)="onCalculate()">Calculate Estimated Tax</button>
+    </div>
+
+    <div class="summary-card">
+      <h2>Tax Summary</h2>
+
+      @if (!usResult && !simpleResult) {
+        <div class="empty-summary">
+          <div class="calc-icon">🧮</div>
+          <p>Enter your income and deduction details to calculate your estimated quarterly tax.</p>
+        </div>
+      } @else if (usResult) {
+        <p class="method-badge">✅ Detailed US calculation (2026 IRS figures)</p>
+        <div class="summary-rows">
+          <div class="summary-row"><span>Net Profit (Annualized)</span><strong>${{ usResult.netProfit.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Self-Employment Tax (15.3%)</span><strong>${{ usResult.selfEmploymentTax.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Adjusted Gross Income</span><strong>${{ usResult.adjustedGrossIncome.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Standard Deduction</span><strong>${{ usResult.standardDeduction.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Taxable Income</span><strong>${{ usResult.taxableIncome.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Federal Income Tax</span><strong>${{ usResult.incomeTax.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Total Annual Tax</span><strong>${{ usResult.totalAnnualTax.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Effective Tax Rate</span><strong>{{ usResult.effectiveRate.toFixed(1) }}%</strong></div>
+          <div class="summary-row highlight"><span>Estimated Tax Due This Quarter</span><strong>${{ usResult.quarterlyTaxDue.toFixed(2) }}</strong></div>
+          <div class="summary-row safe-harbor"><span>IRS Safe Harbor (90% rule)</span><strong>${{ usResult.safeHarborQuarterly.toFixed(2) }}</strong></div>
+        </div>
+        <p class="disclaimer">Based on 2026 IRS Rev. Proc. 2025-32 figures. Excludes state tax, AMT, and tax credits. Verify with a CPA before filing.</p>
+      } @else if (simpleResult) {
+        <p class="method-badge">ℹ️ Simplified estimate for {{ country }}</p>
+        <div class="summary-rows">
+          <div class="summary-row"><span>Total Deductions</span><strong>${{ simpleResult.totalDeductions.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Taxable Income (Quarter)</span><strong>${{ simpleResult.taxableQuarterly.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Annualized Taxable Income</span><strong>${{ simpleResult.annualizedTaxable.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Effective Tax Rate</span><strong>{{ simpleResult.effectiveRate.toFixed(1) }}%</strong></div>
+          <div class="summary-row highlight"><span>Estimated Tax Due</span><strong>${{ simpleResult.quarterlyTax.toFixed(2) }}</strong></div>
+        </div>
+        @if (simpleResult.usedGenericRate) {
+          <p class="disclaimer">⚠️ No detailed tax brackets for {{ country }} yet — using a generic 20% flat-rate estimate. Doesn't include social security contributions specific to this country.</p>
+        } @else {
+          <p class="disclaimer">⚠️ Simplified income tax bracket estimate — doesn't include social security contributions or country-specific rules. Confirm with a local tax advisor.</p>
+        }
+      }
+    </div>
+  </div>
+} @else {
+  <div class="calendar-card">
+    <h2>Tax Calendar</h2>
+
+    @for (group of calendarGroups; track group.month) {
+      <h3 class="month-heading">{{ group.month }}</h3>
+      @for (event of group.events; track event.title) {
+        <div class="event-row">
+          <div class="event-info">
+            <div class="event-title">{{ event.title }}</div>
+            <div class="event-date">{{ event.date }}</div>
+            <div class="event-desc">{{ event.description }}</div>
+          </div>
+          <span class="badge" [class.reminder]="event.badge === 'reminder'" [class.payment]="event.badge === 'payment'">
+            {{ event.badge }}
+          </span>
+        </div>
+      }
+    }
+  </div>
+}

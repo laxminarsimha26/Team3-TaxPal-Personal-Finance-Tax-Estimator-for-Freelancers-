@@ -6,7 +6,7 @@ import { TransactionService } from './transaction.service';
 export interface BudgetProgress extends Budget {
   spent: number;
   remaining: number;
-  percentUsed: number; // capped at 100 for bar width, actual can exceed
+  percentUsed: number; 
 }
 
 @Injectable({ providedIn: 'root' })
@@ -15,7 +15,7 @@ export class BudgetService {
 
   private allBudgets = signal<Budget[]>(this.load());
 
-  // Currently viewed month — defaults to this month, but the page can change it
+  
   selectedMonth = signal<string>(this.currentMonthString());
 
   constructor(private auth: AuthService, private txService: TransactionService) {}
@@ -34,7 +34,7 @@ export class BudgetService {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(budgets));
   }
 
-  // This user's budgets for the selected month, with spending calculated
+  
   budgetsWithProgress = computed<BudgetProgress[]>(() => {
     const userId = this.auth.currentUser()?.id;
     const month = this.selectedMonth();
@@ -61,7 +61,7 @@ export class BudgetService {
     });
   });
 
-  // Categories that already have a budget set this month (to avoid duplicates in the form)
+  
   budgetedCategories = computed(() =>
     new Set(this.budgetsWithProgress().map(b => b.category))
   );
@@ -76,7 +76,7 @@ export class BudgetService {
     );
 
     if (existing) {
-      // update in place
+      
       const updated = this.allBudgets().map(b =>
         b.id === existing.id ? { ...b, limit } : b
       );

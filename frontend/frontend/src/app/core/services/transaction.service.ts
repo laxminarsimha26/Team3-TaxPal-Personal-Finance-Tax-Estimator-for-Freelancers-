@@ -10,7 +10,7 @@ export class TransactionService {
 
   constructor(private auth: AuthService) {}
 
-  // Only this user's transactions, newest first
+  
   transactions = computed(() => {
     const userId = this.auth.currentUser()?.id;
     return this.allTransactions()

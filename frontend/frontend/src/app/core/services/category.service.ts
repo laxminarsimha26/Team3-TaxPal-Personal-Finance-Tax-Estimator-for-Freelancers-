@@ -12,7 +12,7 @@ export class CategoryService {
   private allCategories = signal<Category[]>(this.load());
 
   constructor(private auth: AuthService) {
-    // Seed default categories the first time a user has none
+    
     effect(() => {
       const user = this.auth.currentUser();
       if (user) this.seedIfNeeded(user.id);
@@ -55,7 +55,7 @@ export class CategoryService {
     this.forCurrentUser().filter(c => c.type === 'expense')
   );
 
-  // Plain string arrays — handy for dropdowns in transaction-form and budgets
+  
   incomeCategoryNames = computed(() => this.incomeCategories().map(c => c.name));
   expenseCategoryNames = computed(() => this.expenseCategories().map(c => c.name));
 

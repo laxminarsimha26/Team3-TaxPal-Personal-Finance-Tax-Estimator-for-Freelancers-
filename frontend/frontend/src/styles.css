@@ -1,15 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
-/* Eye-Friendly Global Dark Theme */
+
 body {
   margin: 0;
   padding: 0;
-  background-color: #0f172a; /* Soft dark slate background */
+  background-color: #0f172a; 
   color: #f8fafc;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
 }
 
-/* App Header Bar (Contains Title & Logout Button) */
+
 .app-header {
   display: flex;
   justify-content: space-between;
@@ -27,10 +26,10 @@ body {
   color: #38bdf8;
 }
 
-/* Logout Button Styling */
+
 .logout-btn {
   background-color: #334155;
-  color: #f87171; /* Soft pastel red text */
+  color: #f87171; 
   border: 1px solid #475569;
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -44,7 +43,7 @@ body {
 }
 
 .logout-btn:hover {
-  background-color: #7f1d1d; /* Subtle dark red on hover */
+  background-color: #7f1d1d; 
   color: #fca5a5;
   border-color: #991b1b;
 }

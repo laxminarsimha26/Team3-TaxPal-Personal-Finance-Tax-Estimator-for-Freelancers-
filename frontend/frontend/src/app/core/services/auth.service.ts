@@ -76,7 +76,7 @@ export class AuthService {
     return {
       success: true,
       message: 'If that email is registered, a reset link has been sent.',
-      token, // in production this goes into the emailed link, never returned to the client
+      token, 
     };
   }
 

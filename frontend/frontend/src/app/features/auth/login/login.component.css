@@ -1,4 +1,4 @@
-/* Glassmorphism Background & Layout */
+
 .auth-container {
   display: flex;
   justify-content: center;
@@ -12,7 +12,7 @@
   box-sizing: border-box;
 }
 
-/* Glass Card with Modern Backdrop Filter */
+
 .auth-card {
   background: rgba(255, 255, 255, 0.98);
   padding: 2.75rem 2.25rem;
@@ -36,7 +36,7 @@
   }
 }
 
-/* Stylish Gradient Heading */
+
 .auth-card h1 {
   margin: 0 0 1.75rem 0;
   font-size: 1.75rem;
@@ -48,7 +48,7 @@
   letter-spacing: -0.025em;
 }
 
-/* Labels */
+
 .auth-card label {
   display: block;
   margin-top: 1.25rem;
@@ -59,7 +59,7 @@
   letter-spacing: 0.05em;
 }
 
-/* Inputs with Interactive Border Glow */
+
 .auth-card input {
   width: 100%;
   padding: 0.85rem 1rem;
@@ -80,7 +80,7 @@
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
 }
 
-/* Stylish Error Box */
+
 .error {
   color: #ef4444;
   background-color: rgba(239, 68, 68, 0.08);
