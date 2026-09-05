@@ -150,3 +150,6 @@
 
 .forgot-link { text-align: right; font-size: 0.8rem; margin-top: 0.4rem; }
 .forgot-link a { color: #2f6fed; text-decoration: none; }
+@media (max-width: 480px) {
+  .auth-card { padding: 1.8rem 1.2rem; margin: 0 1rem; }
+}

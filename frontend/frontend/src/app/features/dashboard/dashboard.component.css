@@ -307,3 +307,12 @@ td.expense {
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.7);
 }
+.card-link { display: block; font-size: 0.75rem; color: #2f6fed; margin-top: 0.3rem; text-decoration: none; }
+.muted { color: #999; }
+
+@media (max-width: 768px) {
+  .summary-cards { flex-direction: column; }
+  .charts-row { flex-direction: column; }
+  .chart-card { width: 100%; box-sizing: border-box; }
+  table { display: block; overflow-x: auto; white-space: nowrap; }
+}

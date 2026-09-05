@@ -10,9 +10,15 @@
     <strong>₹{{ txService.totalExpense().toFixed(2) }}</strong>
   </div>
   <div class="card">
-    <span>Estimated Tax Due</span>
-    <strong>Coming in Milestone 3</strong>
-  </div>
+  <span>Estimated Tax Due</span>
+  @if (latestTaxEstimate(); as estimate) {
+    <strong>{{ taxService.currencySymbolFor(estimate.country) }}{{ estimate.estimatedTax.toFixed(2) }}</strong>
+    <a class="card-link" routerLink="/tax-estimator">View details</a>
+  } @else {
+    <strong class="muted">Not calculated</strong>
+    <a class="card-link" routerLink="/tax-estimator">Calculate now</a>
+  }
+</div>
   <div class="card">
     <span>Savings Rate</span>
     <strong>{{ savingsRate() }}%</strong>

@@ -7,6 +7,7 @@ export interface TaxEstimate {
   year: number;
   country: string;
   estimatedTax: number;
+  calculatedAt: number; 
 }
 
 export interface CalendarEvent {

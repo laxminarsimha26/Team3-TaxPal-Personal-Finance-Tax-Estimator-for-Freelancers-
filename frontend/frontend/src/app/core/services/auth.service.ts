@@ -64,7 +64,7 @@ export class AuthService {
     const user = users.find(u => u.email === email);
 
     if (!user) {
-      // Don't reveal whether the email exists — same message either way (real security practice)
+     
       return { success: true, message: 'If that email is registered, a reset link has been sent.' };
     }
 

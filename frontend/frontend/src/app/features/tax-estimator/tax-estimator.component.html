@@ -57,7 +57,7 @@
       <div class="field full">
         <label>Gross Income for Quarter</label>
         <div class="money-input">
-          <span>$</span>
+          <span>{{ taxService.currencySymbolFor(country) }}</span>
           <input type="number" min="0" step="0.01" placeholder="0.00" [(ngModel)]="grossIncome" />
         </div>
       </div>
@@ -67,28 +67,28 @@
         <div class="field">
           <label>Business Expenses</label>
           <div class="money-input">
-            <span>$</span>
+            <span>{{ taxService.currencySymbolFor(country) }}</span>
             <input type="number" min="0" step="0.01" placeholder="0.00" [(ngModel)]="businessExpenses" />
           </div>
         </div>
         <div class="field">
           <label>Retirement Contributions</label>
           <div class="money-input">
-            <span>$</span>
+            <span>{{ taxService.currencySymbolFor(country) }}</span>
             <input type="number" min="0" step="0.01" placeholder="0.00" [(ngModel)]="retirementContributions" />
           </div>
         </div>
         <div class="field">
           <label>Health Insurance Premiums</label>
           <div class="money-input">
-            <span>$</span>
+            <span>{{ taxService.currencySymbolFor(country) }}</span>
             <input type="number" min="0" step="0.01" placeholder="0.00" [(ngModel)]="healthInsurancePremiums" />
           </div>
         </div>
         <div class="field">
           <label>Home Office Deduction</label>
           <div class="money-input">
-            <span>$</span>
+            <span>{{ taxService.currencySymbolFor(country) }}</span>
             <input type="number" min="0" step="0.01" placeholder="0.00" [(ngModel)]="homeOfficeDeduction" />
           </div>
         </div>
@@ -108,26 +108,26 @@
       } @else if (usResult) {
         <p class="method-badge">✅ Detailed US calculation (2026 IRS figures)</p>
         <div class="summary-rows">
-          <div class="summary-row"><span>Net Profit (Annualized)</span><strong>${{ usResult.netProfit.toFixed(2) }}</strong></div>
-          <div class="summary-row"><span>Self-Employment Tax (15.3%)</span><strong>${{ usResult.selfEmploymentTax.toFixed(2) }}</strong></div>
-          <div class="summary-row"><span>Adjusted Gross Income</span><strong>${{ usResult.adjustedGrossIncome.toFixed(2) }}</strong></div>
-          <div class="summary-row"><span>Standard Deduction</span><strong>${{ usResult.standardDeduction.toFixed(2) }}</strong></div>
-          <div class="summary-row"><span>Taxable Income</span><strong>${{ usResult.taxableIncome.toFixed(2) }}</strong></div>
-          <div class="summary-row"><span>Federal Income Tax</span><strong>${{ usResult.incomeTax.toFixed(2) }}</strong></div>
-          <div class="summary-row"><span>Total Annual Tax</span><strong>${{ usResult.totalAnnualTax.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Net Profit (Annualized)</span><strong>{{ taxService.currencySymbolFor(country) }}{{ usResult.netProfit.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Self-Employment Tax (15.3%)</span><strong>{{ taxService.currencySymbolFor(country) }}{{ usResult.selfEmploymentTax.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Adjusted Gross Income</span><strong>{{ taxService.currencySymbolFor(country) }}{{ usResult.adjustedGrossIncome.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Standard Deduction</span><strong>{{ taxService.currencySymbolFor(country) }}{{ usResult.standardDeduction.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Taxable Income</span><strong>{{ taxService.currencySymbolFor(country) }}{{ usResult.taxableIncome.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Federal Income Tax</span><strong>{{ taxService.currencySymbolFor(country) }}{{ usResult.incomeTax.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Total Annual Tax</span><strong>{{ taxService.currencySymbolFor(country) }}{{ usResult.totalAnnualTax.toFixed(2) }}</strong></div>
           <div class="summary-row"><span>Effective Tax Rate</span><strong>{{ usResult.effectiveRate.toFixed(1) }}%</strong></div>
-          <div class="summary-row highlight"><span>Estimated Tax Due This Quarter</span><strong>${{ usResult.quarterlyTaxDue.toFixed(2) }}</strong></div>
-          <div class="summary-row safe-harbor"><span>IRS Safe Harbor (90% rule)</span><strong>${{ usResult.safeHarborQuarterly.toFixed(2) }}</strong></div>
+          <div class="summary-row highlight"><span>Estimated Tax Due This Quarter</span><strong>{{ taxService.currencySymbolFor(country) }}{{ usResult.quarterlyTaxDue.toFixed(2) }}</strong></div>
+          <div class="summary-row safe-harbor"><span>IRS Safe Harbor (90% rule)</span><strong>{{ taxService.currencySymbolFor(country) }}{{ usResult.safeHarborQuarterly.toFixed(2) }}</strong></div>
         </div>
         <p class="disclaimer">Based on 2026 IRS Rev. Proc. 2025-32 figures. Excludes state tax, AMT, and tax credits. Verify with a CPA before filing.</p>
       } @else if (simpleResult) {
         <p class="method-badge">ℹ️ Simplified estimate for {{ country }}</p>
         <div class="summary-rows">
-          <div class="summary-row"><span>Total Deductions</span><strong>${{ simpleResult.totalDeductions.toFixed(2) }}</strong></div>
-          <div class="summary-row"><span>Taxable Income (Quarter)</span><strong>${{ simpleResult.taxableQuarterly.toFixed(2) }}</strong></div>
-          <div class="summary-row"><span>Annualized Taxable Income</span><strong>${{ simpleResult.annualizedTaxable.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Total Deductions</span><strong>{{ taxService.currencySymbolFor(country) }}{{ simpleResult.totalDeductions.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Taxable Income (Quarter)</span><strong>{{ taxService.currencySymbolFor(country) }}{{ simpleResult.taxableQuarterly.toFixed(2) }}</strong></div>
+          <div class="summary-row"><span>Annualized Taxable Income</span><strong>{{ taxService.currencySymbolFor(country) }}{{ simpleResult.annualizedTaxable.toFixed(2) }}</strong></div>
           <div class="summary-row"><span>Effective Tax Rate</span><strong>{{ simpleResult.effectiveRate.toFixed(1) }}%</strong></div>
-          <div class="summary-row highlight"><span>Estimated Tax Due</span><strong>${{ simpleResult.quarterlyTax.toFixed(2) }}</strong></div>
+          <div class="summary-row highlight"><span>Estimated Tax Due</span><strong>{{ taxService.currencySymbolFor(country) }}{{ simpleResult.quarterlyTax.toFixed(2) }}</strong></div>
         </div>
         @if (simpleResult.usedGenericRate) {
           <p class="disclaimer">⚠️ No detailed tax brackets for {{ country }} yet — using a generic 20% flat-rate estimate. Doesn't include social security contributions specific to this country.</p>

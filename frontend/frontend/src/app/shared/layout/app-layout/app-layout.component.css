@@ -1,2 +1,51 @@
 .layout { display: flex; min-height: 100vh; background: #f6f7fb; }
 .content { flex: 1; padding: 2rem; box-sizing: border-box; }
+
+.mobile-topbar-toggle, .mobile-brand, .backdrop { display: none; }
+
+/* ============ MOBILE ============ */
+@media (max-width: 768px) {
+  .content { padding: 4.5rem 1rem 1.5rem; }
+
+  .mobile-topbar-toggle {
+  display: block;
+  position: fixed;
+  top: 0.9rem;
+  left: 1rem;
+  z-index: 1100;
+  background: #000000;
+  border: 1px solid #080707;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+  .mobile-brand {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 4.2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    background: #000000;
+    color: #ffffff;
+    z-index: 1050;
+  }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 999;
+  }
+}
+

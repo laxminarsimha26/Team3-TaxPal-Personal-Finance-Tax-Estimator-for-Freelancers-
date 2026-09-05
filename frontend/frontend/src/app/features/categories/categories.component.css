@@ -243,3 +243,7 @@
   text-align: center;
   padding: 1.5rem 0;
 }
+@media (max-width: 768px) {
+  .category-columns { flex-direction: column; }
+  .add-form { flex-direction: column; }
+}

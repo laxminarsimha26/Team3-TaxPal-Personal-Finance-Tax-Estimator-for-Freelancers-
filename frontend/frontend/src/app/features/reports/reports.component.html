@@ -1,0 +1,118 @@
+<h1 class="page-title">Financial Reports</h1>
+<p class="subtitle">Generate and download your financial reports</p>
+
+<div class="generate-card">
+  <h2>Generate Report</h2>
+
+  <div class="form-grid">
+    <div class="field">
+      <label>Report Type</label>
+      <select [(ngModel)]="reportType">
+        @for (rt of reportTypes; track rt) {
+          <option [value]="rt">{{ rt }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Period</label>
+      <select [(ngModel)]="period">
+        @for (p of periods; track p) {
+          <option [value]="p">{{ p }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Format</label>
+      <select [(ngModel)]="format">
+        @for (f of formats; track f) {
+          <option [value]="f">{{ f }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  @if (period === 'Custom Range') {
+    <div class="form-grid">
+      <div class="field">
+        <label>Start Date</label>
+        <input type="date" [(ngModel)]="customStart" />
+      </div>
+      <div class="field">
+        <label>End Date</label>
+        <input type="date" [(ngModel)]="customEnd" />
+      </div>
+    </div>
+  }
+
+  <div class="action-buttons">
+    <button class="reset-btn" (click)="onReset()">Reset</button>
+    <button class="generate-btn" (click)="onGenerateReport()">Generate Report</button>
+  </div>
+</div>
+
+<div class="recent-card">
+  <h2>Recent Reports</h2>
+
+ @if (recentReports().length === 0) {
+  <p class="empty-state">No results.</p>
+} @else {
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Report Name</th><th>Generated</th><th>Period</th><th>Format</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        @for (r of recentReports(); track r.id) {
+          <tr (click)="onPreview(r)" [class.selected]="selectedReport()?.id === r.id">
+            <td>{{ r.reportType }}</td>
+            <td>{{ r.generatedAt | date: 'MMM d, y, h:mm a' }}</td>
+            <td>{{ r.periodLabel }}</td>
+            <td>{{ r.format }}</td>
+            <td class="actions">
+              <button (click)="onPreview(r); $event.stopPropagation()">Preview</button>
+              <button (click)="onDownload(r); $event.stopPropagation()">Download</button>
+              <button class="delete" (click)="onDelete(r, $event)">✕</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
+</div>
+
+<div class="preview-card">
+  <div class="preview-header">
+    <h2>Report Preview</h2>
+    @if (selectedReport()) {
+      <div class="preview-actions">
+        <button (click)="onPrint(selectedReport()!)">🖨 Print</button>
+        <button class="download" (click)="onDownload(selectedReport()!)">⬇ Download</button>
+      </div>
+    }
+  </div>
+
+  @if (!selectedReport()) {
+    <div class="empty-preview">
+      <div class="doc-icon">📄</div>
+      <p><strong>Select a report to preview</strong></p>
+      <p class="muted">Generated reports will appear here for review before downloading</p>
+    </div>
+  } @else {
+    <div class="preview-content">
+      <h3>{{ selectedReport()!.reportType }}</h3>
+      <p class="preview-meta">Period: {{ selectedReport()!.periodLabel }} · Format: {{ selectedReport()!.format }}</p>
+
+      @if (previewSummary; as s) {
+        <div class="preview-summary">
+          <div><span>Total Income</span><strong class="income">₹{{ s.totalIncome.toFixed(2) }}</strong></div>
+          <div><span>Total Expenses</span><strong class="expense">₹{{ s.totalExpense.toFixed(2) }}</strong></div>
+          <div><span>Net Savings</span><strong>₹{{ s.netSavings.toFixed(2) }}</strong></div>
+          <div><span>Transactions</span><strong>{{ s.transactionCount }}</strong></div>
+        </div>
+      }
+    </div>
+  }
+</div>

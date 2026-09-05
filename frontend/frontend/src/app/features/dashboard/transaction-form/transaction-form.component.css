@@ -119,3 +119,6 @@
   box-shadow: none;
   cursor: not-allowed;
 }
+@media (max-width: 768px) {
+  .type-toggle { flex-direction: column; }
+}

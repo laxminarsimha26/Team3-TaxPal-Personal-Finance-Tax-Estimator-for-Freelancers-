@@ -169,3 +169,9 @@
 }
 .badge.reminder { background: #e0e7ff; color: #4338ca; }
 .badge.payment { background: #fef3c7; color: #b45309; }
+@media (max-width: 768px) {
+  .calculator-layout { flex-direction: column; }
+  .summary-card { position: static; width: 100%; box-sizing: border-box; }
+  .form-grid { grid-template-columns: 1fr; }
+  .quarter-grid { grid-template-columns: repeat(2, 1fr); }
+}

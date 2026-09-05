@@ -1,6 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { TransactionService } from '../../core/services/transaction.service';
+import { TaxService } from '../../core/services/tax.service';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -11,15 +12,18 @@ import { RouterLink } from '@angular/router';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  constructor(public auth: AuthService, public txService: TransactionService) {}
+  constructor(
+    public auth: AuthService,
+    public txService: TransactionService,
+    public taxService: TaxService
+  ) {}
 
   recentTransactions = computed(() => this.txService.transactions().slice(0, 5));
 
-  // Highest amount between income and expense to scale bar heights correctly
   maxBarValue = computed(() => {
     const inc = this.txService.totalIncome();
     const exp = this.txService.totalExpense();
-    return Math.max(inc, exp, 1); // Avoid division by zero
+    return Math.max(inc, exp, 1);
   });
 
   incomeBarHeight = computed(() => {
@@ -34,7 +38,6 @@ export class DashboardComponent {
     return Math.min(100, Math.round((exp / this.maxBarValue()) * 100));
   });
 
-  // Category breakdown for the expense pie (category -> % of total expense)
   expenseBreakdown = computed(() => {
     const expenses = this.txService.transactions().filter(t => t.type === 'expense');
     const total = expenses.reduce((sum, t) => sum + t.amount, 0);
@@ -54,7 +57,6 @@ export class DashboardComponent {
     }));
   });
 
-  // Conic-gradient string for the CSS pie chart
   pieGradient = computed(() => {
     const segments = this.expenseBreakdown();
     let cumulative = 0;
@@ -71,4 +73,7 @@ export class DashboardComponent {
     if (income === 0) return 0;
     return Math.round((this.txService.balance() / income) * 100);
   });
+
+  // Most recently calculated tax estimate, whatever quarter it was for
+  latestTaxEstimate = computed(() => this.taxService.latestEstimate());
 }

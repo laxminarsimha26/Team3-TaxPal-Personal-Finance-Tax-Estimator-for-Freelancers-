@@ -1,5 +1,16 @@
 <div class="layout">
-  <app-sidebar />
+  <button class="mobile-topbar-toggle" (click)="toggleSidebar()" aria-label="Open menu">
+    ☰
+  </button>
+
+  <div class="mobile-brand">TaxPal</div>
+
+  @if (sidebarOpen()) {
+    <div class="backdrop" (click)="closeSidebar()"></div>
+  }
+
+  <app-sidebar [mobileOpen]="sidebarOpen()" (linkClicked)="closeSidebar()" />
+
   <main class="content">
     <router-outlet />
   </main>

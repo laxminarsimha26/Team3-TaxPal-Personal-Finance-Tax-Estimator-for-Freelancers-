@@ -8,11 +8,6 @@ interface TaxBracket {
   rate: number;
 }
 
-// ============================================================
-// UNITED STATES — real 2026 IRS figures (IRS Rev. Proc. 2025-32)
-// Verify current-year numbers at irs.gov before actual filing —
-// these adjust for inflation every year.
-// ============================================================
 const US_STANDARD_DEDUCTION: Record<string, number> = {
   Single: 16100,
   Married: 32200,
@@ -39,15 +34,11 @@ const US_BRACKETS: Record<string, TaxBracket[]> = {
   ],
 };
 
-const SE_TAX_SS_WAGE_BASE = 184500;   // 2026 Social Security wage base
-const SE_TAX_SS_RATE = 0.124;         // Social Security portion
-const SE_TAX_MEDICARE_RATE = 0.029;   // Medicare portion (uncapped)
-const SE_NET_EARNINGS_FACTOR = 0.9235; // only 92.35% of net profit is subject to SE tax
+const SE_TAX_SS_WAGE_BASE = 184500;
+const SE_TAX_SS_RATE = 0.124;
+const SE_TAX_MEDICARE_RATE = 0.029;
+const SE_NET_EARNINGS_FACTOR = 0.9235;
 
-// ============================================================
-// OTHER COUNTRIES — simplified progressive brackets
-// (illustrative only, not verified against current official tables)
-// ============================================================
 const SIMPLIFIED_SLABS: Record<string, TaxBracket[]> = {
   India: [
     { upTo: 300000, rate: 0 },
@@ -69,6 +60,13 @@ const STATES: Record<string, string[]> = {
   'United States': ['California', 'New York', 'Texas', 'Florida', 'Other'],
   India: ['Maharashtra', 'Delhi', 'Karnataka', 'Tamil Nadu', 'Other'],
   'United Kingdom': ['England', 'Scotland', 'Wales', 'Northern Ireland'],
+};
+
+
+const CURRENCY_SYMBOLS: Record<string, string> = {
+  'United States': '$',
+  India: '₹',
+  'United Kingdom': '£',
 };
 
 const QUARTER_LABELS: Record<Quarter, string> = {
@@ -128,6 +126,10 @@ export class TaxService {
     return !!SIMPLIFIED_SLABS[country];
   }
 
+  currencySymbolFor(country: string): string {
+    return CURRENCY_SYMBOLS[country] ?? '$';
+  }
+
   private load(): TaxEstimate[] {
     const raw = localStorage.getItem(this.STORAGE_KEY);
     return raw ? JSON.parse(raw) : [];
@@ -149,7 +151,6 @@ export class TaxService {
     return tax;
   }
 
-  // Real US 1099/freelancer calculation
   calculateUS(input: {
     grossIncome: number;
     businessExpenses: number;
@@ -194,7 +195,6 @@ export class TaxService {
     };
   }
 
-  // Simplified calculation for every other country
   calculateSimplified(input: {
     grossIncome: number;
     businessExpenses: number;
@@ -225,12 +225,19 @@ export class TaxService {
   saveEstimate(quarter: Quarter, year: number, country: string, estimatedTax: number): void {
     const userId = this.auth.currentUser()?.id;
     if (!userId) return;
+
+    const now = Date.now();
     const existing = this.allEstimates().find(e => e.userId === userId && e.quarter === quarter && e.year === year);
+
     let updated: TaxEstimate[];
     if (existing) {
-      updated = this.allEstimates().map(e => (e.id === existing.id ? { ...e, estimatedTax, country } : e));
+      updated = this.allEstimates().map(e =>
+        e.id === existing.id ? { ...e, estimatedTax, country, calculatedAt: now } : e
+      );
     } else {
-      updated = [...this.allEstimates(), { id: crypto.randomUUID(), userId, quarter, year, country, estimatedTax }];
+      updated = [...this.allEstimates(), {
+        id: crypto.randomUUID(), userId, quarter, year, country, estimatedTax, calculatedAt: now,
+      }];
     }
     this.allEstimates.set(updated);
     this.persist(updated);
@@ -265,5 +272,12 @@ export class TaxService {
       grouped.get(e.month)!.push(e);
     }
     return Array.from(grouped.entries()).map(([month, events]) => ({ month, events }));
+  }
+
+  latestEstimate(): TaxEstimate | undefined {
+    const userId = this.auth.currentUser()?.id;
+    const userEstimates = this.allEstimates().filter(e => e.userId === userId);
+    if (userEstimates.length === 0) return undefined;
+    return userEstimates.reduce((latest, e) => (e.calculatedAt > latest.calculatedAt ? e : latest));
   }
 }

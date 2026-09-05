@@ -54,7 +54,7 @@ export const routes: Routes = [
             m => m.BudgetsComponent
           ),
       },
-       {
+      {
         path: 'tax-estimator',
         loadComponent: () =>
           import('./features/tax-estimator/tax-estimator.component').then(
@@ -65,6 +65,11 @@ export const routes: Routes = [
         path: 'categories',
         loadComponent: () =>
           import('./features/categories/categories.component').then(m => m.CategoriesComponent),
+      },
+      {
+        path: 'reports',
+        loadComponent: () =>
+          import('./features/reports/reports.component').then(m => m.ReportsComponent),
       },
     ],
   },
