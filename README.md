@@ -1,44 +1,34 @@
-💼 TaxPal — Personal Finance & Tax Estimator for Freelancers
+💼 TaxPal
 
-<p align="center">
-  <strong>Track • Budget • Estimate Taxes • Report</strong><br>
-  A full-stack personal finance platform designed to help freelancers manage income, expenses, budgets, tax estimates, and financial reports in one place.
-</p>
+Personal Finance & Tax Estimator for Freelancers
 
-<p align="center">
+Track • Budget • Estimate Taxes • Report
 
-
-
-
-
-
-
-
-</p>
+A full-stack personal finance platform that helps freelancers manage income, expenses, budgets, tax estimates, and financial reports in one connected workflow.
 
 ⭐ Project at a Glance
 
-TaxPal is a full-stack web application built for freelancers who need a simple way to understand their personal business finances.
+TaxPal is a full-stack web application designed for freelancers who need a simple and organized way to understand their business finances.
 
-Instead of maintaining separate spreadsheets for income, expenses, budgets, taxes, and reports, TaxPal brings these activities into one application.
+Instead of maintaining separate spreadsheets for income, expenses, budgets, taxes, and reports, TaxPal brings everything together in one application.
 
 🎯 What TaxPal Solves
 
 Freelancers commonly need to:
 
-Track irregular income from different sources
+💵 Track irregular income from different sources
 
-Record and categorize business expenses
+💳 Record and categorize business expenses
 
-Control monthly spending through budgets
+📊 Control monthly spending with budgets
 
-Estimate quarterly tax obligations
+🧮 Estimate quarterly tax obligations
 
-Review monthly and quarterly financial performance
+📈 Review monthly and quarterly financial performance
 
-Export financial information for further use
+📤 Export financial information for further use
 
-TaxPal combines these activities into one connected workflow.
+TaxPal connects all of these activities into one workflow.
 
 🚀 Core Modules
 
@@ -52,13 +42,13 @@ Key Capabilities
 
 Track financial activity
 
-Add income, add expenses, view transactions, delete transactions
+Add income, add expenses, categorize transactions, view history, delete transactions
 
 📊 B — Categorization & Budgeting
 
 Organize and control spending
 
-Categories, monthly budgets, budget management
+Categories, suggested categories, monthly budgets, budget management
 
 🧮 C — Tax Estimation Engine
 
@@ -70,11 +60,11 @@ Country/region selection, filing status, deductions, quarterly estimates, tax ca
 
 Understand and share financial data
 
-Summary reports, monthly/quarterly breakdowns, CSV export, PDF reports, report history
+Summary reports, monthly/quarterly analysis, CSV export, PDF reports, report history
 
 ✨ Key Features
 
-🔐 Authentication
+🔐 Authentication & Security
 
 User registration
 
@@ -87,6 +77,10 @@ Protected application routes
 Password hashing with bcrypt
 
 User-specific financial data
+
+HTTP-only session cookies
+
+Environment-based database credentials
 
 💵 Transaction Management
 
@@ -102,7 +96,7 @@ View transaction history
 
 Delete transactions
 
-Income and expense totals
+Calculate income and expense totals
 
 🗂️ Categories & Budgeting
 
@@ -116,13 +110,15 @@ Budget creation and updates
 
 Budget deletion
 
-Spending organization
+Category-based spending organization
+
+Monthly spending control
 
 🧮 Tax Estimation
 
 Country selection
 
-Region/state selection where applicable
+State/region selection where applicable
 
 Filing-status selection
 
@@ -140,7 +136,7 @@ Home-office deduction input
 
 Tax calendar and due-date information
 
-Detailed calculation for supported U.S. tax scenarios
+Detailed calculations for supported U.S. scenarios
 
 Simplified estimation for other supported countries
 
@@ -174,52 +170,43 @@ Printable reports
 
 🏗️ System Architecture
 
-                         ┌─────────────────────────┐
-                         │      TaxPal User        │
-                         │      Web Browser        │
-                         └────────────┬────────────┘
-                                      │
-                                      ▼
-                         ┌─────────────────────────┐
-                         │   Angular Frontend      │
-                         │   localhost:4200        │
-                         │                         │
-                         │ • Login / Signup        │
-                         │ • Dashboard             │
-                         │ • Transactions          │
-                         │ • Budgets               │
-                         │ • Categories            │
-                         │ • Tax Estimator         │
-                         │ • Reports               │
-                         └────────────┬────────────┘
-                                      │ HTTP / JSON
-                                      │ Session Cookie
-                                      ▼
-                         ┌─────────────────────────┐
-                         │   Node.js + Express     │
-                         │   localhost:5000        │
-                         │                         │
-                         │ • Authentication        │
-                         │ • Transactions          │
-                         │ • Budgets               │
-                         │ • Tax Estimation        │
-                         │ • Reports               │
-                         │ • CSV Export            │
-                         └────────────┬────────────┘
-                                      │
-                                      ▼
-                         ┌─────────────────────────┐
-                         │      MySQL Database     │
-                         │         taxpal          │
-                         │                         │
-                         │ • users                 │
-                         │ • transactions          │
-                         │ • budgets               │
-                         │ • suggested_categories  │
-                         │ • tax_estimates         │
-                         │ • alerts                │
-                         │ • reports               │
-                         └─────────────────────────┘
+┌──────────────────────────────────────────┐
+│              👤 TaxPal User             │
+│               Web Browser                │
+└─────────────────────┬────────────────────┘
+                      │
+                      ▼
+┌──────────────────────────────────────────┐
+│           🖥️ Angular Frontend           │
+│              localhost:4200             │
+│                                          │
+│  Login • Dashboard • Transactions        │
+│  Budgets • Categories • Tax Estimator    │
+│  Reports                                  │
+└─────────────────────┬────────────────────┘
+                      │
+                HTTP / JSON
+              Session Cookie
+                      │
+                      ▼
+┌──────────────────────────────────────────┐
+│          ⚙️ Node.js + Express           │
+│              localhost:5000             │
+│                                          │
+│  Authentication • Transactions           │
+│  Budgets • Tax Estimation • Reports      │
+│  CSV Export                               │
+└─────────────────────┬────────────────────┘
+                      │
+                      ▼
+┌──────────────────────────────────────────┐
+│             🗄️ MySQL Database           │
+│                 taxpal                   │
+│                                          │
+│  users • transactions • budgets          │
+│  suggested_categories • tax_estimates    │
+│  alerts • reports                        │
+└──────────────────────────────────────────┘
 
 🔄 Application Flow
 
@@ -245,41 +232,83 @@ CSV / PDF Export
 
 Frontend
 
+Technology
+
+Purpose
+
 Angular 22
+
+Frontend framework
 
 TypeScript
 
+Application development
+
 Angular Router
+
+Page navigation
 
 Angular Forms
 
+Form handling
+
 RxJS
+
+Reactive programming
 
 HTML5
 
+UI structure
+
 CSS3
+
+UI styling
 
 jsPDF
 
+PDF generation
+
 jsPDF AutoTable
+
+PDF tables
 
 Backend
 
+Technology
+
+Purpose
+
 Node.js
+
+Server runtime
 
 Express.js 5
 
+REST API
+
 Express Session
+
+Session authentication
 
 CORS
 
+Frontend/backend communication
+
 dotenv
+
+Environment configuration
 
 bcrypt
 
+Password hashing
+
 mysql2
 
+MySQL connectivity
+
 JSON Web Token support
+
+Authentication infrastructure
 
 Database
 
@@ -351,7 +380,7 @@ Team3-TaxPal-Personal-Finance-Tax-Estimator-for-Freelancers/
 
 🗄️ Database Design
 
-The database is named:
+Database
 
 taxpal
 
@@ -389,21 +418,20 @@ reports
 
 Stores generated report metadata
 
-Relationships
+🔗 Relationships
 
-users
-  │
-  ├──────< transactions
-  │
-  ├──────< budgets
-  │
-  ├──────< tax_estimates
-  │
-  ├──────< alerts
-  │
-  └──────< reports
+                    users
+                      │
+       ┌──────────────┼──────────────┬──────────────┐
+       │              │              │              │
+       ▼              ▼              ▼              ▼
+transactions      budgets      tax_estimates     alerts
+       │
+       │
+       ▼
+    reports
 
-User-related records use foreign keys and cascading deletion.
+User-related records use foreign keys with cascading deletion.
 
 🔐 Authentication & Security
 
@@ -427,25 +455,25 @@ Protected API requests
 
 Security Measures
 
-Password hashing using bcrypt
+🔒 Password hashing using bcrypt
 
-HTTP-only session cookies
+🍪 HTTP-only session cookies
 
-Protected frontend routes
+🛡️ Protected frontend routes
 
-Authenticated backend operations
+🔐 Authenticated backend operations
 
-User-specific database queries
+👤 User-specific database queries
 
-Database credentials stored in .env
+🔑 Database credentials stored in .env
 
-.env excluded through .gitignore
+🚫 .env excluded through .gitignore
 
 ⚠️ Never commit your real .env file or database password to GitHub.
 
 💰 Income & Expense Management
 
-Transactions are stored with:
+Transactions are stored using:
 
 Transaction
 ├── User
@@ -454,18 +482,19 @@ Transaction
 ├── Amount
 └── Date
 
-Supported transaction types:
+Supported Transaction Types
 
 income
+
 expense
 
-The dashboard and reporting system use these transactions to calculate financial summaries.
+The dashboard and reporting system use transaction records to calculate financial summaries.
 
 📊 Budget Management
 
 Users can create budgets based on categories and months.
 
-Budget management supports:
+Budget Capabilities
 
 Create budget
 
@@ -487,51 +516,73 @@ TaxPal provides a dedicated tax-estimation module.
 
 Supported Inputs
 
+Input
+
+Description
+
 Country
 
-State/region
+Tax jurisdiction
 
-Filing status
+State / Region
+
+Regional selection where applicable
+
+Filing Status
+
+Filing-status selection
 
 Quarter
 
-Gross income
+Tax quarter
 
-Business expenses
+Gross Income
 
-Retirement contributions
+Quarterly income
 
-Health insurance premiums
+Business Expenses
 
-Home-office deduction
+Deductible business expenses
 
-U.S. Detailed Calculation
+Retirement Contributions
 
-For supported U.S. calculations, the application derives:
+Retirement contribution input
+
+Health Insurance
+
+Health insurance premium input
+
+Home Office
+
+Home-office deduction input
+
+🇺🇸 U.S. Detailed Calculation
+
+For supported U.S. scenarios, TaxPal derives:
 
 Net Profit
-      ↓
+    ↓
 Self-Employment Tax
-      ↓
+    ↓
 Adjusted Gross Income
-      ↓
+    ↓
 Standard Deduction
-      ↓
+    ↓
 Taxable Income
-      ↓
+    ↓
 Income Tax
-      ↓
+    ↓
 Total Annual Tax
-      ↓
+    ↓
 Quarterly Tax Due
 
-Simplified Calculation
+🌍 Simplified Calculation
 
 For supported non-detailed scenarios, TaxPal calculates a simplified taxable amount and estimated tax using the configured generic-rate approach.
 
-Tax Calendar
+📅 Tax Calendar
 
-The application also provides quarterly tax calendar information to help users identify important estimated-tax periods and due dates.
+The application provides quarterly tax-calendar information to help users identify estimated-tax periods and due dates.
 
 ℹ️ Tax estimates are intended for planning and educational use and should not be treated as professional tax advice.
 
@@ -557,40 +608,65 @@ Monthly Breakdown
 
 Displays:
 
+Field
+
+Description
+
 Month
+
+Reporting month
 
 Income
 
+Total income
+
 Expense
 
-Net savings
+Total expenses
 
-Transaction count
+Net Savings
+
+Income minus expenses
+
+Transaction Count
+
+Number of transactions
 
 Quarterly Breakdown
 
 Displays:
 
+Field
+
+Description
+
 Quarter
+
+Q1–Q4
 
 Income
 
+Total income
+
 Expense
 
-Net savings
+Total expenses
 
-Transaction count
+Net Savings
+
+Income minus expenses
+
+Transaction Count
+
+Number of transactions
 
 📤 Export Features
 
-CSV
+CSV Export
 
 The backend supports CSV export containing:
 
-Date
-Type
-Category
-Amount
+Date, Type, Category, Amount
 
 Example:
 
@@ -598,7 +674,7 @@ Example:
 "2026-09-07","income","Investment","5000.00"
 "2026-09-07","expense","Rent","4000.00"
 
-PDF
+PDF Export
 
 The Angular frontend can generate formatted PDF reports using:
 
@@ -606,11 +682,11 @@ jsPDF
 
 jsPDF AutoTable
 
-Reports can also be printed from the application.
+Reports can also be printed directly from the application.
 
 🔌 REST API
 
-Base backend URL:
+Base URL
 
 http://localhost:5000
 
@@ -862,22 +938,22 @@ MySQL Workbench or MySQL command-line client
 
 Git
 
-1️⃣ Clone the Repository
+1. Clone the Repository
 
 git clone https://github.com/springboardmentor87/Team3-TaxPal-Personal-Finance-Tax-Estimator-for-Freelancers-.git
 cd Team3-TaxPal-Personal-Finance-Tax-Estimator-for-Freelancers-
 
-2️⃣ Configure MySQL
+2. Configure MySQL
 
-Start MySQL and create the database using:
+Start MySQL and create the database:
 
 mysql -u root -p
 
-Then import:
+Import the database script:
 
 SOURCE path/to/database/databasem1.sql;
 
-Verify:
+Verify the database:
 
 SHOW DATABASES;
 USE taxpal;
@@ -885,7 +961,7 @@ SHOW TABLES;
 
 You should see the TaxPal tables.
 
-3️⃣ Configure Backend
+3. Configure Backend
 
 Open a terminal:
 
@@ -896,35 +972,29 @@ Create:
 
 Backend/.env
 
-Use your own local database credentials:
+Use your own local credentials:
 
 PORT=5000
-
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=taxpal
-
 SESSION_SECRET=your_session_secret
 
-⚠️ Important
+⚠️ Keep .env private. Do not commit it to GitHub.
 
-Do not copy a real password into this README.
+4. Start Backend
 
-Do not commit .env to GitHub.
-
-4️⃣ Start Backend
-
-From the Backend folder:
+From the Backend directory:
 
 node server.js
 
-Expected startup messages:
+Expected output:
 
 MySQL Connected
 Server running on port 5000
 
-5️⃣ Start Frontend
+5. Start Frontend
 
 Open a second terminal:
 
@@ -936,50 +1006,50 @@ Open:
 
 http://localhost:4200
 
-🧪 Recommended Demo / Testing Flow
+🧪 Recommended Panel Demonstration
 
-For a panel demonstration, use this sequence:
+Use the following sequence for a smooth project presentation:
 
                     TAXPAL DEMO
                          │
                          ▼
-                 Create Account
+                 👤 Create Account
                          │
                          ▼
-                       Login
+                      🔐 Login
                          │
                          ▼
-                    Dashboard
-                         │
-              ┌──────────┴──────────┐
-              ▼                     ▼
-        Add Income              Add Expense
-              │                     │
-              └──────────┬──────────┘
-                         ▼
-                    Categories
-                         │
-                         ▼
-                      Budget
-                         │
-                         ▼
-                  Tax Estimator
-                         │
-                         ▼
-                    Tax Result
-                         │
-                         ▼
-                      Reports
+                    📊 Dashboard
                          │
               ┌──────────┴──────────┐
               ▼                     ▼
-         Monthly Report       Quarterly Report
+        💰 Add Income          💳 Add Expense
               │                     │
               └──────────┬──────────┘
                          ▼
-                  CSV / PDF Export
+                    🗂️ Categories
+                         │
+                         ▼
+                     📊 Budget
+                         │
+                         ▼
+                  🧮 Tax Estimator
+                         │
+                         ▼
+                     Tax Result
+                         │
+                         ▼
+                    📑 Reports
+                         │
+              ┌──────────┴──────────┐
+              ▼                     ▼
+       Monthly Report       Quarterly Report
+              │                     │
+              └──────────┬──────────┘
+                         ▼
+                  📤 CSV / PDF Export
 
-Suggested Panel Demonstration
+Suggested Demo Steps
 
 Register a new user
 
@@ -1001,50 +1071,66 @@ Calculate estimated tax
 
 Open Reports
 
-Show summary
+Show financial summary
 
-Show monthly/quarterly breakdown
+Show monthly and quarterly breakdowns
 
 Export CSV
 
-Generate/preview PDF
+Generate or preview PDF
 
 Show report history
 
-📌 Example Report Calculations
+📌 Example Report Calculation
 
-If a user records:
+Suppose a user records:
 
-Income   = ₹/ $ 5,000
-Expense  = ₹/ $ 4,000
+Income  = 5,000
+Expense = 4,000
 
 The financial summary becomes:
 
-Total Income  = 5,000
-Total Expense = 4,000
-Net Savings   = 1,000
+Metric
 
-The reporting module uses the transaction records stored in MySQL to generate these values.
+Value
+
+💰 Total Income
+
+5,000
+
+💳 Total Expense
+
+4,000
+
+📈 Net Savings
+
+1,000
+
+The reporting module calculates these values from transaction records stored in MySQL.
 
 🧩 Backend Architecture
 
-TaxPal follows a controller-model-route structure.
+TaxPal follows a Controller → Model → Database architecture supported by REST routes.
 
-Request
-  ↓
-Route
-  ↓
-Controller
-  ↓
-Model
-  ↓
-MySQL
-  ↓
+Client Request
+      ↓
+    Route
+      ↓
+  Controller
+      ↓
+     Model
+      ↓
+    MySQL
+      ↓
 Controller Response
-  ↓
+      ↓
 Angular Frontend
 
 Backend Responsibilities
+
+Layer
+
+Responsibility
 
 Routes
 
@@ -1052,27 +1138,19 @@ Define API endpoints
 
 Controllers
 
-Validate requests
-
-Check authentication
-
-Coordinate application logic
-
-Return API responses
+Validate requests, authenticate users, coordinate logic
 
 Models
 
 Execute database queries
 
-Retrieve and persist application data
-
 Database
 
-Permanently stores user and financial information
+Permanently store application data
 
 🎨 Frontend Architecture
 
-The Angular application is organized around:
+The Angular application is organized into reusable feature areas:
 
 src/app/
 │
@@ -1108,7 +1186,7 @@ report.service.ts
 
 category.service.ts
 
-This separation keeps business communication and reusable logic outside individual UI components.
+This separation keeps reusable business communication and application logic outside individual UI components.
 
 📋 Project Requirements Mapping
 
@@ -1186,7 +1264,7 @@ Reports module
 
 🏆 Why TaxPal Stands Out
 
-1. One Connected Workflow
+1. 🔗 One Connected Workflow
 
 TaxPal connects:
 
@@ -1194,13 +1272,13 @@ Transactions → Budgets → Taxes → Reports
 
 rather than treating them as separate tools.
 
-2. Freelancer-Focused
+2. 👨‍💻 Freelancer-Focused
 
-The system is designed around the irregular income and expense patterns commonly associated with freelance work.
+The application is designed around the irregular income and expense patterns commonly associated with freelance work.
 
-3. Actionable Financial View
+3. 📈 Actionable Financial View
 
-Users can move from raw transactions to:
+Users can move from raw financial activity to:
 
 Financial Activity
        ↓
@@ -1210,9 +1288,9 @@ Tax Planning
        ↓
 Financial Reporting
 
-4. Full-Stack Implementation
+4. 🧑‍💻 Full-Stack Implementation
 
-The application demonstrates:
+The project demonstrates:
 
 Angular frontend
 
@@ -1230,9 +1308,11 @@ Report generation
 
 CSV/PDF export
 
+Frontend/backend integration
+
 🔮 Future Enhancements
 
-Potential future improvements include:
+Potential improvements include:
 
 Automated bank-account transaction import
 
@@ -1268,18 +1348,17 @@ Local Development
 
 The documented configuration assumes:
 
-Frontend → http://localhost:4200
-Backend  → http://localhost:5000
-Database → MySQL / taxpal
+Frontend  → http://localhost:4200
+Backend   → http://localhost:5000
+Database  → MySQL / taxpal
 
 👥 Team Project
 
 Project: TaxPal — Personal Finance & Tax Estimator for Freelancers
 
-Repository:
-springboardmentor87/Team3-TaxPal-Personal-Finance-Tax-Estimator-for-Freelancers-
+Repository: springboardmentor87/Team3-TaxPal-Personal-Finance-Tax-Estimator-for-Freelancers-
 
-This project demonstrates collaborative full-stack development across:
+The project demonstrates collaborative full-stack development across:
 
 Frontend development
 
@@ -1297,32 +1376,76 @@ Testing and integration
 
 🎤 Panel Presentation — Quick Explanation
 
-“TaxPal is a full-stack personal finance and tax estimation platform designed for freelancers. It allows users to manage income and expenses, organize spending with categories and budgets, estimate quarterly taxes, and generate financial reports. The Angular frontend communicates with an Express and Node.js backend, while MySQL provides persistent storage. The system connects the complete workflow from transaction tracking to budgeting, tax planning, and reporting.”
+“TaxPal is a full-stack personal finance and tax estimation platform designed for freelancers. It allows users to manage income and expenses, organize spending with categories and budgets, estimate quarterly taxes, and generate financial reports. The Angular frontend communicates with an Express and Node.js backend, while MySQL provides persistent storage. TaxPal connects the complete workflow from transaction tracking to budgeting, tax planning, and reporting.”
 
 ⭐ One-Line Summary
 
 TaxPal turns everyday financial transactions into organized budgets, tax estimates, and actionable financial reports.
 
-📄 Project Status
+📊 Project Status
 
-<p align="center">
+Feature
 
-✅ Authentication
-✅ Transactions
-✅ Categories
-✅ Budgeting
-✅ Tax Estimation
-✅ Tax Calendar
-✅ Financial Reports
-✅ Monthly Analysis
-✅ Quarterly Analysis
-✅ CSV Export
-✅ PDF Export
-✅ Report History
-✅ MySQL Integration
+Status
 
-</p>
+🔐 Authentication
 
-<p align="center">
-  <strong>💼 TaxPal — Simplifying Finance for Freelancers</strong>
-</p>
+✅ Complete
+
+💰 Transactions
+
+✅ Complete
+
+🗂️ Categories
+
+✅ Complete
+
+📊 Budgeting
+
+✅ Complete
+
+🧮 Tax Estimation
+
+✅ Complete
+
+📅 Tax Calendar
+
+✅ Complete
+
+📑 Financial Reports
+
+✅ Complete
+
+📈 Monthly Analysis
+
+✅ Complete
+
+📊 Quarterly Analysis
+
+✅ Complete
+
+📤 CSV Export
+
+✅ Complete
+
+📄 PDF Export
+
+✅ Complete
+
+🗃️ Report History
+
+✅ Complete
+
+🗄️ MySQL Integration
+
+✅ Complete
+
+<div align="center">
+
+💼 TaxPal
+
+Simplifying Finance for Freelancers
+
+Track • Budget • Estimate Taxes • Report
+
+</div>
