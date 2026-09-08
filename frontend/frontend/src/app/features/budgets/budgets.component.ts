@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { BudgetService } from '../../core/services/budget.service';
 import { CategoryService } from '../../core/services/category.service';
 
 @Component({
   selector: 'app-budgets',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   templateUrl: './budgets.component.html',
   styleUrl: './budgets.component.css',
 })

@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { TransactionFormComponent } from '../dashboard/transaction-form/transaction-form.component';
 import { TransactionListComponent } from '../dashboard/transaction-list/transaction-list.component';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-transactions',
   standalone: true,
-  imports: [TransactionFormComponent, TransactionListComponent],
+  imports: [RouterLink, TransactionFormComponent, TransactionListComponent],
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.css',
 })
