@@ -1,5 +1,7 @@
 export type ReportType = 'Income Statement' | 'Expense Report' | 'Full Transaction Report';
+
 export type ReportPeriod = 'Current Month' | 'Last Month' | 'Current Quarter' | 'Current Year' | 'Custom Range';
+
 export type ReportFormat = 'PDF' | 'CSV';
 
 export interface GeneratedReport {
@@ -7,9 +9,9 @@ export interface GeneratedReport {
   userId: string;
   reportType: ReportType;
   period: ReportPeriod;
-  periodLabel: string;   
+  periodLabel: string;
   format: ReportFormat;
   generatedAt: number;
-  startDate: string;    
+  startDate: string;
   endDate: string;
 }

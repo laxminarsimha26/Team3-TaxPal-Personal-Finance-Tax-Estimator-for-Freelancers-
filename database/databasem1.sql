@@ -21,13 +21,6 @@ CREATE TABLE transactions (
     date DATE not null,
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE);
 
-<<<<<<< HEAD
-   
->>>>>>> 36d969f (added users and transactions tables)
-
-
-=======
->>>>>>> 6f899e2 (CHANGES)
 -- 3. BUDGETS TABLE
 CREATE TABLE budgets (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -50,7 +43,6 @@ CREATE TABLE suggested_categories (
     description VARCHAR(255)
 );
 
-
 -- 5. TAX ESTIMATES TABLE
 CREATE TABLE tax_estimates (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -71,7 +63,6 @@ CREATE TABLE tax_estimates (
         ON DELETE CASCADE
 );
 
-
 -- 6. ALERTS TABLE
 CREATE TABLE alerts (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -84,7 +75,6 @@ CREATE TABLE alerts (
         REFERENCES users(id)
         ON DELETE CASCADE
 );
-
 
 -- 7. REPORTS TABLE
 CREATE TABLE reports (
