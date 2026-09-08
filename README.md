@@ -170,63 +170,26 @@ Printable reports
 
 🏗️ System Architecture
 
-┌──────────────────────────────────────────┐
-│              👤 TaxPal User             │
-│               Web Browser                │
-└─────────────────────┬────────────────────┘
-                      │
-                      ▼
-┌──────────────────────────────────────────┐
-│           🖥️ Angular Frontend           │
-│              localhost:4200             │
-│                                          │
-│  Login • Dashboard • Transactions        │
-│  Budgets • Categories • Tax Estimator    │
-│  Reports                                  │
-└─────────────────────┬────────────────────┘
-                      │
-                HTTP / JSON
-              Session Cookie
-                      │
-                      ▼
-┌──────────────────────────────────────────┐
-│          ⚙️ Node.js + Express           │
-│              localhost:5000             │
-│                                          │
-│  Authentication • Transactions           │
-│  Budgets • Tax Estimation • Reports      │
-│  CSV Export                               │
-└─────────────────────┬────────────────────┘
-                      │
-                      ▼
-┌──────────────────────────────────────────┐
-│             🗄️ MySQL Database           │
-│                 taxpal                   │
-│                                          │
-│  users • transactions • budgets          │
-│  suggested_categories • tax_estimates    │
-│  alerts • reports                        │
-└──────────────────────────────────────────┘
+flowchart TD
+    A["👤 TaxPal User<br/>Web Browser"] --> B["🖥️ Angular Frontend<br/>localhost:4200"]
+    B -->|"HTTP / JSON<br/>Session Cookie"| C["⚙️ Node.js + Express<br/>localhost:5000"]
+    C -->|"SQL Queries"| D["🗄️ MySQL Database<br/>taxpal"]
+
+    B --- B1["Login • Dashboard<br/>Transactions • Budgets<br/>Categories • Tax Estimator • Reports"]
+    C --- C1["Authentication • Transactions<br/>Budgets • Tax Estimation<br/>Reports • CSV Export"]
+    D --- D1["users • transactions • budgets<br/>suggested_categories • tax_estimates<br/>alerts • reports"]
 
 🔄 Application Flow
 
-Register / Login
-       ↓
-Authenticated Session
-       ↓
-Dashboard
-       ↓
-Income + Expenses
-       ↓
-Categories + Budgets
-       ↓
-Tax Estimation
-       ↓
-Monthly / Quarterly Analysis
-       ↓
-Reports
-       ↓
-CSV / PDF Export
+flowchart LR
+    A["Register / Login"] --> B["Authenticated Session"]
+    B --> C["Dashboard"]
+    C --> D["Income + Expenses"]
+    D --> E["Categories + Budgets"]
+    E --> F["Tax Estimation"]
+    F --> G["Monthly / Quarterly Analysis"]
+    G --> H["Reports"]
+    H --> I["CSV / PDF Export"]
 
 🛠️ Technology Stack
 
@@ -324,59 +287,95 @@ Cascading user-data deletion
 
 Team3-TaxPal-Personal-Finance-Tax-Estimator-for-Freelancers/
 │
-├── 📁 Backend/
-│   ├── 📁 config/
+├── Backend/
+│   ├── config/
 │   │   └── db.js
-│   │
-│   ├── 📁 controllers/
+│   ├── controllers/
 │   │   ├── authController.js
 │   │   ├── budgetController.js
 │   │   ├── reportController.js
 │   │   ├── taxcontroller.js
 │   │   └── transactionController.js
-│   │
-│   ├── 📁 middleware/
+│   ├── middleware/
 │   │   └── authMiddleware.js
-│   │
-│   ├── 📁 models/
+│   ├── models/
 │   │   ├── budgetmodel.js
 │   │   ├── reportModel.js
 │   │   ├── taxmodel.js
 │   │   ├── transactionModel.js
 │   │   └── usermodel.js
-│   │
-│   ├── 📁 routes/
+│   ├── routes/
 │   │   ├── authRoutes.js
 │   │   ├── budgetRoutes.js
 │   │   ├── reportRoutes.js
 │   │   ├── taxroutes.js
 │   │   └── transactionRoutes.js
-│   │
 │   ├── .gitignore
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── readme.md
 │   └── server.js
 │
-├── 📁 database/
+├── database/
 │   └── databasem1.sql
 │
-└── 📁 frontend/
-    └── 📁 frontend/
-        ├── 📁 public/
-        ├── 📁 src/
-        │   ├── 📁 app/
-        │   │   ├── 📁 core/
-        │   │   ├── 📁 features/
-        │   │   └── 📁 shared/
+└── frontend/
+    └── frontend/
+        ├── public/
+        ├── src/
+        │   ├── app/
+        │   │   ├── core/
+        │   │   ├── features/
+        │   │   └── shared/
         │   ├── index.html
         │   ├── main.ts
         │   └── styles.css
-        │
         ├── angular.json
         ├── package.json
         ├── package-lock.json
         └── tsconfig.json
+
+📦 Main Application Areas
+
+Area
+
+Purpose
+
+Backend/config
+
+Database configuration
+
+Backend/controllers
+
+API request handling and application logic
+
+Backend/models
+
+MySQL queries and data access
+
+Backend/routes
+
+REST API endpoint definitions
+
+Backend/middleware
+
+Authentication middleware
+
+database
+
+MySQL database initialization script
+
+frontend/frontend/src/app/core
+
+Shared models, data and services
+
+frontend/frontend/src/app/features
+
+Feature modules and screens
+
+frontend/frontend/src/app/shared
+
+Shared layout and route guards
 
 🗄️ Database Design
 
