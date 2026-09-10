@@ -5,7 +5,7 @@ const cors = require("cors");
 const session = require("express-session");
 
 const authRoutes = require("./routes/authRoutes");
-const transactionRoutes = require("./routes/transactionroutes");
+const transactionRoutes = require("./routes/transactionRoutes");
 const budgetRoutes = require("./routes/budgetroutes");
 const taxRoutes = require("./routes/taxroutes");
 const reportRoutes = require("./routes/reportRoutes");
