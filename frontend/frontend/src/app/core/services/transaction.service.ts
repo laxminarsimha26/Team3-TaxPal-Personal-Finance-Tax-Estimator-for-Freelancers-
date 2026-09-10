@@ -12,7 +12,7 @@ interface TransactionResponse {
 
 @Injectable({ providedIn: 'root' })
 export class TransactionService {
-  private readonly API = 'http://localhost:5000/api/transactions';
+  private readonly API = 'https://team3-taxpal-personal-finance-tax.onrender.com/api/transactions';
 
   private allTransactions = signal<Transaction[]>([]);
 

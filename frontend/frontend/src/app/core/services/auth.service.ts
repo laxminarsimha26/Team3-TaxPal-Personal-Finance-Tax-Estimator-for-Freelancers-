@@ -10,7 +10,7 @@ interface AuthResponse {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly API = 'http://localhost:5000/api/auth';
+  private readonly API = 'https://team3-taxpal-personal-finance-tax.onrender.com/api/auth';
 
   currentUser = signal<User | null>(null);
 

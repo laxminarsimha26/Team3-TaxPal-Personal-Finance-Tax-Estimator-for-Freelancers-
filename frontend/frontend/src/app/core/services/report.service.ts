@@ -29,7 +29,7 @@ interface DeleteReportResponse {
 @Injectable({ providedIn: 'root' })
 export class ReportService {
   private readonly STORAGE_KEY = 'taxpal_generated_reports';
-  private readonly API_URL = 'http://localhost:5000/api/reports';
+  private readonly API_URL = 'https://team3-taxpal-personal-finance-tax.onrender.com/api/reports';
   private allReports = signal<GeneratedReport[]>(this.load());
 
   constructor(

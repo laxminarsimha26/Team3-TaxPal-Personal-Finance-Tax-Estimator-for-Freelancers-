@@ -13,7 +13,7 @@ const reportRoutes = require("./routes/reportRoutes");
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:4200",
+    origin: "https://team3-tax-pal-personal-finance-tax.vercel.app",
     credentials: true
 }));
 
@@ -35,7 +35,7 @@ app.use("/api/budgets", budgetRoutes);
 app.use("/api/tax", taxRoutes);
 app.use("/api/reports", reportRoutes);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

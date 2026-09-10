@@ -19,7 +19,7 @@ interface BudgetResponse {
 
 @Injectable({ providedIn: 'root' })
 export class BudgetService {
-  private readonly API = 'http://localhost:5000/api/budgets';
+  private readonly API = 'https://team3-taxpal-personal-finance-tax.onrender.com/api/budgets';
 
   private allBudgets = signal<Budget[]>([]);
 
