@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 
-const userModel = require("../models/userModel");
+const userModel = require("../models/usermodel");
 
 exports.signup = (req, res) => {
     const { name, email, password, country } = req.body;
