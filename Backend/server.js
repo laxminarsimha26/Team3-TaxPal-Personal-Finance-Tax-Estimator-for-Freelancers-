@@ -12,6 +12,8 @@ const reportRoutes = require("./routes/reportRoutes");
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 app.use(cors({
     origin: "https://team3-tax-pal-personal-finance-tax-ruby.vercel.app",
     credentials: true
