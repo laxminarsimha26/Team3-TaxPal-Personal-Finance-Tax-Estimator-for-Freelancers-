@@ -138,8 +138,8 @@ const QUARTER_DUE_MONTH: Record<Quarter, number> = {
 
 @Injectable({ providedIn: 'root' })
 export class TaxService {
-  private readonly API =
-    'http://localhost:5000/api/tax';
+private readonly API =
+  'https://team3-taxpal-personal-finance-tax.onrender.com/api/tax';
 
   countries = ALL_COUNTRIES;
 
