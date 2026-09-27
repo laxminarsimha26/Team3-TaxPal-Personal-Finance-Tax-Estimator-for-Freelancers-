@@ -13,7 +13,7 @@ const reportRoutes = require("./routes/reportRoutes");
 const app = express();
 
 app.use(cors({
-    origin: "https://team3-tax-pal-personal-finance-tax.vercel.app",
+    origin: "https://team3-tax-pal-personal-finance-tax-ruby.vercel.app",
     credentials: true
 }));
 
